@@ -52,6 +52,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'carzone.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -70,19 +71,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'carzone.wsgi.application'
 
+TIME_ZONE = 'UTC'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'carzone_db',
+        'USER':'postgres',
+        'PASSWORD':'root',
+        'HOST':'localhost',
+            'OPTIONS': {
+            'options': '-c timezone=UTC',
+        },
     }
 }
 
 
-# Password validation
+# Password validation admin
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -123,4 +131,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS= [
     os.path.join(BASE_DIR,'carzone/static'),
-]
+]   
+
+#media settings
+
+MEDIA_ROOT=os.path.join(BASE_DIR,'media') 
+MEDIA_URL='/media/'
